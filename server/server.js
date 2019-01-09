@@ -1,3 +1,4 @@
+require('./config/config');
 const _ = require('lodash');
 const express = require('express');
 const  bodyParser = require('body-parser');
@@ -10,16 +11,15 @@ const {ObjectID} = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(bodyParser.json());
 
-app.post('/todos',(req,res)=>{
-    console.log('fs');
+app.post('/todos',(req,res)=>{    
     var todo = new Todo({
         text:req.body.text
     });
 
-    todo.save().then((doc)=>{
-        console.log('1');
+    todo.save().then((doc)=>{        
         res.send(doc);
     }, (e)=>{
         res.status(400).send(e);
